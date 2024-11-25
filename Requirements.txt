@@ -1,7 +1,7 @@
 matplotlib
 keras
-tensorflow
-sklearn
+tensorflow[and-cuda]
+scikit-learn
 imutils
 numpy
 opencv-python

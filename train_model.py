@@ -6,11 +6,12 @@ import matplotlib
 matplotlib.use("Agg")
 
 # import the necessary packages
-from keras.preprocessing.image import ImageDataGenerator
-from keras.optimizers import Adam
+from keras.src.legacy.preprocessing.image import ImageDataGenerator
+from keras.src.optimizers import Adam
+from keras.src.optimizers.schedules import ExponentialDecay
 from sklearn.model_selection import train_test_split
-from keras.preprocessing.image import img_to_array
-from keras.utils import to_categorical
+from keras.src.utils import img_to_array
+from keras.src.utils import to_categorical
 from utils.lenet import LeNet
 from imutils import paths
 import matplotlib.pyplot as plt
@@ -83,7 +84,19 @@ aug = ImageDataGenerator(rotation_range=30, width_shift_range=0.1,
 # initialize the model
 print("[INFO] compiling model...")
 model = LeNet.build(width=28, height=28, depth=3, classes=2)
-opt = Adam(lr=INIT_LR, decay=INIT_LR / EPOCHS)
+
+# Define the learning rate schedule
+lr_schedule = ExponentialDecay(
+    initial_learning_rate=INIT_LR,
+    decay_steps=EPOCHS,  # Number of steps over which decay happens
+    decay_rate=0.96,     # Decay rate
+    staircase=True       # Apply decay in discrete intervals
+)
+
+# Pass the schedule to the Adam optimizer
+opt = Adam(learning_rate=lr_schedule)
+
+# compile the model
 model.compile(loss="binary_crossentropy", optimizer=opt,
     metrics=["accuracy"])
 

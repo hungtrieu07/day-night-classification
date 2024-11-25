@@ -6,16 +6,18 @@ Train a model to classify Day / Night images using keras.
 
 Read full article here https://medium.com/@mneonizer/day-night-classification-a01a7d9af695
 
-**Requirements**
+**Install**
 
-````
+```
+conda create -n <tên môi trường> python=3.9
+conda activate <tên môi trường>
 pip install -r Requirements.txt
-````
+```
 
 **Training**
 
 ````
-python train_model.py --dataset images --model model/day_night.hd5
+python train_model.py --dataset images --model model/day_night.h5
 ````
 
 Images directory contains 2 sub-directories
@@ -35,6 +37,16 @@ Images directory contains 2 sub-directories
 ````
 
 And the model is trained to classify these two labels: ``day / night``.
+
+**Predict**
+```
+python predict.py
+```
+
+Cần thay đường dẫn của dataset cần chạy trong file predict.py, định dạng giống Roboflow như ảnh sau:
+
+![alt-text](dataset.png)
+![alt-text](change_dataset_dir.png)
 
 **Testing**
 
