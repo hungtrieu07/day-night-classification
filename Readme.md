@@ -17,7 +17,7 @@ pip install -r Requirements.txt
 **Training**
 
 ````
-python train_model.py --dataset images --model model/day_night.h5
+python train_model.py --dataset images --model output_model.h5 --epochs 140 --plot training_plot.png
 ````
 
 Images directory contains 2 sub-directories
